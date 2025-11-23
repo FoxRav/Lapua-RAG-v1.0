@@ -21,7 +21,7 @@ Tämä kansio sisältää v1.0 -version normalisoidut chunkit 106 pöytäkirjast
 ```python
 import json
 
-with open("docling/106PDF_output/normalized_chunks.jsonl", "r", encoding="utf-8") as f:
+with open("106PDF_output/normalized_chunks.jsonl", "r", encoding="utf-8") as f:
     for line in f:
         chunk = json.loads(line)
         # chunk["text"] → embedding
@@ -30,7 +30,7 @@ with open("docling/106PDF_output/normalized_chunks.jsonl", "r", encoding="utf-8"
 
 ### Testaaminen
 ```bash
-python test_sample_queries.py docling/106PDF_output/normalized_chunks.json
+python test_sample_queries.py 106PDF_output/normalized_chunks.json
 ```
 
 ## Muut tiedostot
@@ -44,6 +44,6 @@ Seuraavat tiedostot eivät ole GitHubissa (liian suuria):
 Nämä voidaan generoida uudelleen ajamalla:
 ```bash
 python process_all_documents_for_rag.py <root_kansio>
-python postprocess_docling_chunks.py docling/106PDF_output
+python postprocess_docling_chunks.py 106PDF_output
 ```
 
