@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Lapua-RAG: Docling-pohjainen RAG-pipeline
 
 RAG-pipeline Lapuan kaupungin päättävien elinten pöytäkirjoille käyttäen Docling-dokumenttiprosessointia.
@@ -106,3 +107,7 @@ git log --oneline
 
 Projekti käyttää Docling-kirjastoa (MIT-lisenssi).
 
+=======
+# Lapua-RAG-v1.0
+Lapuan kaupungin 106 pöytäkirjan Docling+RAG indeksi
+>>>>>>> cd77866cc5e481f7e53fdd7e1092f612bb403135
