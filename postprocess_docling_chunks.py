@@ -356,9 +356,8 @@ def normalize_chunk(
 
     seen_hashes.add(text_hash)
 
-    # Poimi metatiedot
-    source_path = Path(source_file)
-    source_relative = str(source_path.relative_to(source_path.parent.parent.parent)) if source_path.exists() else source_file
+    # Poimi metatiedot ja normalisoi source_file-poluksi suhteellinen polku
+    source_relative = normalize_source_path(source_file)
 
     organisaatio = extract_organisation(text, source_file)
     
@@ -529,9 +528,12 @@ def process_combined_dataset(
 
         # Tarkista onko taulukko
         if is_table_chunk(chunk):
+            # Normalisoi source_file-poluksi suhteellinen polku
+            source_relative = normalize_source_path(source_file)
+            
             # Tallenna taulukko erilliseen listaan
             table_data = {
-                "source_file": source_file,
+                "source_file": source_relative,
                 "text": chunk.get("contextualized_text") or chunk.get("text", ""),
                 "organisaatio": extract_organisation(
                     chunk.get("contextualized_text") or chunk.get("text", ""), source_file
