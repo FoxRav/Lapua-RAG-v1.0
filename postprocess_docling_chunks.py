@@ -27,6 +27,12 @@ logging.basicConfig(
 )
 _log = logging.getLogger(__name__)
 
+# Konfiguraatiovakiot
+MIN_CHUNK_TOKENS = 30  # Vähimmäiskoko ennen yhdistämistä (mikrochunkit)
+TARGET_CHUNK_TOKENS = 384  # Tavoitekoko chunkille
+MAX_CHUNK_TOKENS = 512  # Maksimikoko chunkille
+TOKENS_PER_CHAR = 4  # Token-estimaatio: ~4 merkkiä per token
+
 
 # Organisaatiotunnisteet
 ORGANISAATIOT = [
@@ -287,7 +293,7 @@ def estimate_tokens(text: str) -> int:
     Returns:
         Arvioitu tokenien määrä
     """
-    return len(text) // 4
+    return len(text) // TOKENS_PER_CHAR
 
 
 def normalize_chunk(
@@ -319,8 +325,8 @@ def normalize_chunk(
     # Tarkista tokenien määrä
     estimated_tokens = estimate_tokens(text)
 
-    # Filtteröi liian lyhyet chunkit (mikrochunkit <30 tokenia)
-    if estimated_tokens < 30:
+    # Filtteröi liian lyhyet chunkit (mikrochunkit)
+    if estimated_tokens < MIN_CHUNK_TOKENS:
         # Poikkeus: jos on hyvin lyhyt mutta selkeä kokonaisuus (esim. yksi päätöslause)
         # Tarkista onko se päätös tai pykälä
         text_lower = text.lower()
@@ -333,8 +339,9 @@ def normalize_chunk(
             # Merkitse liian lyhyeksi (yhdistetään myöhemmin)
             pass  # Jätetään normalisoinnin jälkeen yhdistettäväksi
 
-    # Varoita jos chunk on liian pitkä (pitäisi olla harvinaista max_tokens=512:n kanssa)
-    if estimated_tokens > max_tokens * 1.2:  # 20% toleranssi
+    # Varoita jos chunk on liian pitkä
+    TOLERANCE_FACTOR = 1.2  # 20% toleranssi
+    if estimated_tokens > max_tokens * TOLERANCE_FACTOR:
         _log.warning(
             f"Chunk on pidempi kuin max_tokens: ~{estimated_tokens} tokenia "
             f"(max: {max_tokens})"
@@ -395,8 +402,8 @@ def normalize_chunk(
 
 def merge_small_chunks(
     chunks: list[dict[str, Any]],
-    min_tokens: int = 30,
-    target_tokens: int = 384,
+    min_tokens: int = MIN_CHUNK_TOKENS,
+    target_tokens: int = TARGET_CHUNK_TOKENS,
 ) -> list[dict[str, Any]]:
     """
     Yhdistä liian lyhyet chunkit seuraavaan chunkkiin.
@@ -473,10 +480,10 @@ def process_combined_dataset(
     input_json: str | Path,
     output_json: str | Path,
     output_jsonl: str | Path | None = None,
-    min_tokens: int = 150,
-    max_tokens: int = 512,
+    min_tokens: int = MIN_CHUNK_TOKENS,
+    max_tokens: int = MAX_CHUNK_TOKENS,
     merge_small: bool = True,
-    target_tokens: int = 384,
+    target_tokens: int = TARGET_CHUNK_TOKENS,
 ) -> dict[str, Any]:
     """
     Prosessoi yhdistetyn Docling-datasetin ja normalisoi chunkit.
@@ -554,7 +561,7 @@ def process_combined_dataset(
             continue
 
         # Tarkista onko liian lyhyt (yhdistetään myöhemmin)
-        if estimate_tokens(normalized.get("text", "")) < 30:
+        if estimate_tokens(normalized.get("text", "")) < MIN_CHUNK_TOKENS:
             too_short_count += 1
 
         final_chunks.append(normalized)
@@ -571,7 +578,7 @@ def process_combined_dataset(
     _log.info(f"Normalisoituja chunkkeja: {len(final_chunks)}")
     _log.info(f"Taulukoita tallennettu: {tables_count}")
     _log.info(f"Duplikaatteja jätetty pois: {duplicates_count}")
-    _log.info(f"Liian lyhyitä chunkkeja (<30 tokenia): {too_short_count}")
+    _log.info(f"Liian lyhyitä chunkkeja (<{MIN_CHUNK_TOKENS} tokenia): {too_short_count}")
 
     # Yhdistä liian lyhyet chunkit
     if merge_small:
@@ -654,7 +661,7 @@ def process_combined_dataset(
                 "avg_tokens": round(avg_tokens, 1),
                 "min_tokens": min_actual,
                 "max_tokens": max_actual,
-                "target_tokens": 384,
+                "target_tokens": TARGET_CHUNK_TOKENS,
                 "max_tokens_limit": max_tokens,
             },
         },
@@ -699,10 +706,10 @@ def main():
             input_json=input_json,
             output_json=output_json,
             output_jsonl=output_jsonl,
-            min_tokens=30,  # Vähimmäiskoko ennen yhdistämistä (mikrochunkit)
-            max_tokens=512,  # Maksimikoko (Lapua-RAG optimaalinen)
+            min_tokens=MIN_CHUNK_TOKENS,
+            max_tokens=MAX_CHUNK_TOKENS,
             merge_small=True,  # Yhdistä liian lyhyet chunkit
-            target_tokens=384,  # Tavoitekoko
+            target_tokens=TARGET_CHUNK_TOKENS,
         )
 
         print(f"\n✅ Postiprosessointi valmis!")

@@ -1,0 +1,19 @@
+# Lapua-RAG Pipeline v1.0 - Dependencies
+
+# Core document processing
+docling>=1.0.0
+
+# Optional: for custom embedding models
+# transformers>=4.30.0
+# sentence-transformers>=2.2.0
+
+# Standard library dependencies (included in Python)
+# - json
+# - logging
+# - pathlib
+# - typing
+# - hashlib
+# - re
+# - datetime
+# - collections.abc
+

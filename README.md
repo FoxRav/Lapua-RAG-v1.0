@@ -54,7 +54,7 @@ python test_sample_queries.py
 - **Output**: `normalized_chunks.jsonl` (6138 chunkkia)
 - **Metatiedon kattavuus**: 99.9% organisaatio, 99.9% päivämäärä, 34.2% pykälä
 
-**HUOM**: Output-tiedostot (JSON/JSONL) eivät ole GitHubissa, koska ne ovat `.gitignore`-listalla. Vektori-indeksi tulee **v2.0** -versiossa.
+**HUOM**: Valmiit normalisoidut chunkit ovat saatavilla `106PDF_output/` -kansiossa. Vektori-indeksi tulee **v2.0** -versiossa.
 
 ## Chunk-skeema
 
