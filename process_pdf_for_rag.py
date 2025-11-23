@@ -18,6 +18,7 @@ Vaihtoehtoisesti, jos käytät embedding-mallia:
 import json
 import logging
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -214,10 +215,13 @@ def process_pdf_for_rag(
 def main():
     """Pääfunktio esimerkkiä varten."""
     # Käytä käyttäjän antamaa PDF-tiedostoa
-    pdf_path = (
-        r"F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123"
-        r"\Kaupunginvaltuusto\2025\Pöytäkirja-Kaupunginvaltuusto - 10.11.2025, klo 17_14.pdf"
-    )
+    # Käytä komentoriviparametria tai ympäristömuuttujaa
+    if len(sys.argv) > 1:
+        pdf_path = sys.argv[1]
+    else:
+        _log.error("Anna PDF-tiedoston polku komentoriviparametrina")
+        _log.info("Käyttö: python process_pdf_for_rag.py <pdf_polku>")
+        return
 
     # Valinnainen: määritä embedding-malli jos käytät tiettyä mallia RAG:ssa
     # embed_model_id = "sentence-transformers/all-MiniLM-L6-v2"

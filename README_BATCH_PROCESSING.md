@@ -108,7 +108,7 @@ Skripti jatkaa prosessointia vaikka jokin dokumentti epäonnistuisi:
     "failed_documents": 1,
     "total_chunks": 15234,
     "processing_date": "2025-11-23 15:45:00",
-    "root_directory": "F:\\Projekti-Lapua\\..."
+    "root_directory": "<root_kansio>"
   },
   "chunks": [
     {

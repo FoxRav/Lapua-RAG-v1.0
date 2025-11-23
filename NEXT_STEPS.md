@@ -4,7 +4,7 @@
 
 ### Input
 - **Tiedosto**: `normalized_chunks.jsonl` (6138 chunkkia)
-- **Sijainti**: `F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123\rag_output\normalized_chunks.jsonl`
+- **Sijainti**: Määritä oma polku ympäristömuuttujalla tai komentoriviparametrilla
 
 ### Embeddattava teksti
 - **Kenttä**: `text` (sisältää jo kontekstin, esim. "Ympäristölautakunta, 24.10.2023, § 67 ...")

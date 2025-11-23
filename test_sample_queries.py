@@ -9,7 +9,9 @@ Testaa että:
 
 import json
 import logging
+import os
 import random
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -212,10 +214,19 @@ def test_sample_queries(chunks: list[dict[str, Any]]) -> None:
 def main():
     """Pääfunktio."""
     # Lataa normalisoidut chunkit
-    json_path = r"F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123\rag_output\normalized_chunks.json"
+    # Käytä ympäristömuuttujaa tai komentoriviparametria
+    if len(sys.argv) > 1:
+        json_path = sys.argv[1]
+    else:
+        json_path = os.getenv(
+            "LAPUA_RAG_NORMALIZED_CHUNKS",
+            "normalized_chunks.json"  # Oletus: nykyinen kansio
+        )
 
     if not Path(json_path).exists():
         _log.error(f"Tiedostoa ei löydy: {json_path}")
+        _log.info("Käytä: python test_sample_queries.py <polku_normalized_chunks.json>")
+        _log.info("Tai aseta ympäristömuuttuja: LAPUA_RAG_NORMALIZED_CHUNKS=<polku>")
         _log.info("Aja ensin: python postprocess_docling_chunks.py")
         return
 

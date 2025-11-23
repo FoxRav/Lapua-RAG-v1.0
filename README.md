@@ -52,10 +52,9 @@ python test_sample_queries.py
 
 - **Input**: 106 PDF-pöytäkirjaa
 - **Output**: `normalized_chunks.jsonl` (6138 chunkkia)
-- **Sijainti**: `F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123\rag_output\`
 - **Metatiedon kattavuus**: 99.9% organisaatio, 99.9% päivämäärä, 34.2% pykälä
 
-**HUOM**: `rag_output`-kansio ja sen sisältö (JSON/JSONL-tiedostot) eivät ole GitHubissa, koska ne ovat `.gitignore`-listalla. Vektori-indeksi tulee **v2.0** -versiossa.
+**HUOM**: Output-tiedostot (JSON/JSONL) eivät ole GitHubissa, koska ne ovat `.gitignore`-listalla. Vektori-indeksi tulee **v2.0** -versiossa.
 
 ## Chunk-skeema
 

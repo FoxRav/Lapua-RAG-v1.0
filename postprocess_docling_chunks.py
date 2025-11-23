@@ -12,7 +12,9 @@ Tämä skripti:
 import hashlib
 import json
 import logging
+import os
 import re
+import sys
 from collections.abc import Iterator
 from datetime import datetime
 from pathlib import Path
@@ -677,9 +679,15 @@ def process_combined_dataset(
 def main():
     """Pääfunktio."""
     # Input ja output -tiedostot
-    input_json = r"F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123\rag_output\combined_chunks_only.json"
-    output_json = r"F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123\rag_output\normalized_chunks.json"
-    output_jsonl = r"F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123\rag_output\normalized_chunks.jsonl"
+    # Käytä ympäristömuuttujia tai komentoriviparametreja
+    if len(sys.argv) > 1:
+        base_dir = Path(sys.argv[1])
+    else:
+        base_dir = Path(os.getenv("LAPUA_RAG_OUTPUT_DIR", "."))
+    
+    input_json = base_dir / "combined_chunks_only.json"
+    output_json = base_dir / "normalized_chunks.json"
+    output_jsonl = base_dir / "normalized_chunks.jsonl"
 
     try:
         result = process_combined_dataset(

@@ -12,6 +12,7 @@ Tämä skripti:
 import json
 import logging
 import os
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -358,7 +359,15 @@ def process_all_documents_for_rag(
 def main():
     """Pääfunktio."""
     # Käytä käyttäjän antamaa kansiota
-    root_dir = r"F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123"
+    # Käytä ympäristömuuttujaa tai komentoriviparametria
+    if len(sys.argv) > 1:
+        root_dir = sys.argv[1]
+    else:
+        root_dir = os.getenv("LAPUA_RAG_ROOT_DIR")
+        if not root_dir:
+            _log.error("Anna root-kansio komentoriviparametrina tai aseta LAPUA_RAG_ROOT_DIR")
+            _log.info("Käyttö: python process_all_documents_for_rag.py <root_kansio>")
+            return
 
     # Valinnainen: määritä embedding-malli jos käytät tiettyä mallia RAG:ssa
     # embed_model_id = "sentence-transformers/all-MiniLM-L6-v2"
