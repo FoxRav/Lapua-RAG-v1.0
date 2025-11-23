@@ -106,7 +106,22 @@ python test_sample_queries.py
 3. ⏭️ Embedding-jobi (`normalized_chunks.jsonl`)
 4. ⏭️ End-to-end LLM-testi (Qdrant + chat-käyttöliittymä)
 
+## Vektori-indeksi
+
+**HUOM**: v1.0 sisältää vain normalisoidun datasetin (`normalized_chunks.jsonl`). Vektori-indeksi (Qdrant/ChromaDB) ja embedding-jobit tulevat **v2.0** -versiossa.
+
+v1.0 tarjoaa:
+- ✅ Normalisoidut chunkit (valmiit embedding-jobille)
+- ✅ Metadatat (organisaatio, päivämäärä, pykälä, section_type)
+- ✅ Testit ja validointi
+
+v2.0 sisältää:
+- ⏭️ Embedding-jobit
+- ⏭️ Vektori-indeksi (Qdrant/ChromaDB)
+- ⏭️ End-to-end LLM-testit
+
 ## Versiohistoria
 
 - **v1.0** (2025-11-23): Final dataset, päivämääräbugi korjattu, testit validoitu
+- **v2.0** (tuleva): Embedding-jobit ja vektori-indeksi
 

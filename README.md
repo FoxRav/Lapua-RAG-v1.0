@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Lapua-RAG: Docling-pohjainen RAG-pipeline
 
 RAG-pipeline Lapuan kaupungin päättävien elinten pöytäkirjoille käyttäen Docling-dokumenttiprosessointia.
@@ -53,7 +52,10 @@ python test_sample_queries.py
 
 - **Input**: 106 PDF-pöytäkirjaa
 - **Output**: `normalized_chunks.jsonl` (6138 chunkkia)
+- **Sijainti**: `F:\Projekti-Lapua\Projekti2-20251123\DATA_päättävät_elimet_20251123\rag_output\`
 - **Metatiedon kattavuus**: 99.9% organisaatio, 99.9% päivämäärä, 34.2% pykälä
+
+**HUOM**: `rag_output`-kansio ja sen sisältö (JSON/JSONL-tiedostot) eivät ole GitHubissa, koska ne ovat `.gitignore`-listalla. Vektori-indeksi tulee **v2.0** -versiossa.
 
 ## Chunk-skeema
 
@@ -76,6 +78,8 @@ python test_sample_queries.py
 2. ⏭️ **Embedding-jobi** - käytä `normalized_chunks.jsonl`:ää
 3. ⏭️ **Vector-index** (Qdrant/ChromaDB)
 4. ⏭️ **End-to-end LLM-testi** - chat-käyttöliittymä
+
+**HUOM**: v1.0 sisältää vain normalisoidun datasetin. Vektori-indeksi tulee **v2.0** -versiossa.
 
 ## Testaus
 
@@ -106,8 +110,3 @@ git log --oneline
 ## Lisenssi
 
 Projekti käyttää Docling-kirjastoa (MIT-lisenssi).
-
-=======
-# Lapua-RAG-v1.0
-Lapuan kaupungin 106 pöytäkirjan Docling+RAG indeksi
->>>>>>> cd77866cc5e481f7e53fdd7e1092f612bb403135
