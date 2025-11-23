@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Docling cache
+.cache/
+*.cache
+
+# Data files (ei commitoitava)
+*.json
+*.jsonl
+*.pdf
+
+# HuggingFace cache
+.huggingface/
+models--*/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
