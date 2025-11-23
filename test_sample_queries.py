@@ -218,10 +218,15 @@ def main():
     if len(sys.argv) > 1:
         json_path = sys.argv[1]
     else:
-        json_path = os.getenv(
-            "LAPUA_RAG_NORMALIZED_CHUNKS",
-            "normalized_chunks.json"  # Oletus: nykyinen kansio
-        )
+        # Oletus: 106PDF_output/normalized_chunks.json jos se on olemassa
+        default_path = Path("106PDF_output") / "normalized_chunks.json"
+        if default_path.exists():
+            json_path = str(default_path)
+        else:
+            json_path = os.getenv(
+                "LAPUA_RAG_NORMALIZED_CHUNKS",
+                "normalized_chunks.json"  # Oletus: nykyinen kansio
+            )
 
     if not Path(json_path).exists():
         _log.error(f"Tiedostoa ei löydy: {json_path}")

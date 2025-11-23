@@ -683,7 +683,12 @@ def main():
     if len(sys.argv) > 1:
         base_dir = Path(sys.argv[1])
     else:
-        base_dir = Path(os.getenv("LAPUA_RAG_OUTPUT_DIR", "."))
+        # Oletus: 106PDF_output jos se on olemassa
+        default_dir = Path("106PDF_output")
+        if default_dir.exists():
+            base_dir = default_dir
+        else:
+            base_dir = Path(os.getenv("LAPUA_RAG_OUTPUT_DIR", "."))
     
     input_json = base_dir / "combined_chunks_only.json"
     output_json = base_dir / "normalized_chunks.json"

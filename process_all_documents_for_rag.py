@@ -192,7 +192,7 @@ def process_all_documents_for_rag(
         raise FileNotFoundError(f"Kansiota ei löydy: {root_dir}")
 
     if output_dir is None:
-        output_dir = root_dir / "rag_output"
+        output_dir = root_dir / "106PDF_output"
     else:
         output_dir = Path(output_dir)
 
@@ -383,7 +383,7 @@ def main():
         print(f"\n✅ Prosessointi valmis!")
         print(f"   - Käsitelty dokumentteja: {result['metadata']['processed_documents']}")
         print(f"   - Yhteensä chunkkeja: {result['metadata']['total_chunks']}")
-        print(f"   - Output-kansio: {Path(root_dir) / 'rag_output'}")
+        print(f"   - Output-kansio: {Path(root_dir) / '106PDF_output'}")
 
     except Exception as e:
         _log.error(f"Virhe prosessoinnissa: {e}", exc_info=True)

@@ -38,7 +38,7 @@ python process_all_documents_for_rag.py
 python postprocess_docling_chunks.py
 ```
 
-Output:
+Output (tallennetaan `106PDF_output/`):
 - `normalized_chunks.jsonl` (6138 chunkkia) - **käytä tätä embeddingeissä**
 - `tables_normalized.jsonl` (556 taulukkoa) - erillinen indeksi
 

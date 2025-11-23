@@ -14,9 +14,14 @@ ENV/
 *.cache
 
 # Data files (ei commitoitava)
-*.json
-*.jsonl
 *.pdf
+
+# Suuret väliaikaiset tiedostot (ei commitoitava)
+# HUOM: normalized_chunks.jsonl ja tables_normalized.jsonl ovat OK GitHubiin
+combined_chunks_only.json
+combined_rag_dataset.json
+normalized_chunks.json
+individual_documents/
 
 # HuggingFace cache
 .huggingface/
